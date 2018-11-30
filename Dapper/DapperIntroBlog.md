@@ -225,3 +225,60 @@ of your file name if you forget.
 That's a quick whistle stop tour of dapper's power and functionality. I hope you can see how useful it is for things like testing
 and investigative work, allowing a more logical flow and readable code. If you do have any comments or suggestions please do 
 checkout the github issues page [here](https://github.com/OdinProAgrica/dapper/issues). Contributions also welcome. 
+
+
+## Wait, what would the above look like in ECL? 
+
+Glad you asked, see below:
+
+```ECL
+IMPORT dapper.ExampleData;
+
+//load data
+StarWars := ExampleData.starwars;
+
+
+// Look at the data
+OUTPUT(COUNT(StarWars), NAMED('COUNTstarWars'));
+OUTPUT(StarWars, NAMED('starWars'));
+
+
+//Fill blank species with unknown
+//Create a BMI for each character
+fillblankHomeAndBMI := 
+		PROJECT(StarWars, 
+									TRANSFORM({RECORDOF(LEFT); REAL BMI;},
+																			SELF.BMI := LEFT.mass / LEFT.Height^2;
+																			SELF.species := IF(LEFT.species = '', 'Unkn.', LEFT.species);
+																			SELF := LEFT;));
+OUTPUT(fillblankHomeAndBMI, NAMED('fillblankHomeAndBMI'));
+
+
+//Find the highest
+sortedBMI := SORT(fillblankHomeAndBMI, -bmi);
+OUTPUT(sortedBMI, NAMED('sortedBMI'));
+//Jabba should probably go on a diet. 
+
+
+//How many of each species are there?
+CountRec := RECORD
+		STRING Species := sortedBMI.species;
+		INTEGER n := COUNT(GROUP);
+END;
+
+species := TABLE(sortedBMI, CountRec, species);
+
+sortedspecies :=  SORT(species, -n);
+OUTPUT(sortedspecies, NAMED('sortedspecies'));
+
+
+//Finally let's look at unique hair/eye colour combinations:
+colourData := TABLE(sortedBMI, {hair_color, eye_color});
+unqiueColours := DEDUP(SORT(DISTRIBUTE(colourData, HASH(hair_color)), hair_color, eye_color, LOCAL), hair_color, eye_color, LOCAL);
+OUTPUT(COUNT(unqiueColours), NAMED('COUNTunqiueColours'));
+OUTPUT(unqiueColours, NAMED('unqiueColours'));
+
+
+//and save our results
+OUTPUT(sortedBMI, , 'ROB::TEMP::STARWARSCSV', CSV(HEADING(SINGLE), SEPARATOR(','), TERMINATOR('\n'), QUOTE('"')));
+```
