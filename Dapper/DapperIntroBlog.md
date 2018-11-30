@@ -1,4 +1,4 @@
-# Dapper - a package to make your ECL more dashing. 
+# Dapper - a package to make your ECL more dashing
 At Proagrica we’ve been using HPCC for our data storage and transformation for a couple of years. We’ve learnt a lot over this 
 time but there’s something that comes up quite frequently while we are testing, doing quick investigations or making some model 
 features. The issue is that ECL can be a bit verbose and sometimes simple things are not simple to remember. It can be especially 
