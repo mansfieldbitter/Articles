@@ -5,8 +5,7 @@ features. The issue is that ECL can be a bit verbose and sometimes simple things
 challenging among occasional users who may need to lookup things whenever they open the IDE.  
 
 We felt this pain so developed an ECL bundle to make coding faster, more logical and, most of all, easier to remember. This package 
-has become known as dapper and it allows us to quickly subset, transform and summarise data. If you’ve used R’s dplyr package you 
-may well get what we mean!  
+has become known as dapper and it allows us to quickly subset, transform and summarise data. If you’ve used [R’s dplyr package](https://dplyr.tidyverse.org/) you may well get what we mean!  
 
 Intrigued? Me too. Let’s look at what it can do! 
 
