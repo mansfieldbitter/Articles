@@ -4,7 +4,7 @@ time but there’s something that comes up quite frequently while we are testing
 features. The issue is that ECL can be a bit verbose and sometimes simple things are not simple to remember. It can be especially 
 challenging among occasional users who may need to lookup things whenever they open the IDE.  
 
-We felt this pain so developed n ECL bundle to make coding faster, more logical and, most of all, easier to remember. This package 
+We felt this pain so developed an ECL bundle to make coding faster, more logical and, most of all, easier to remember. This package 
 has become known as dapper and it allows us to quickly subset, transform and summarise data. If you’ve used R’s dplyr package you 
 may well get what we mean!  
 
@@ -26,7 +26,7 @@ following on the command line (although I hear that the latest IDE has this bake
 ecl bundle install -v https://github.com/OdinProAgrica/dapper.git
 ```
 
-There's many more bundles available, but their coverage, testing and adherence to version control varies. HPCC keep a curated 
+There are many more bundles available, but their coverage, testing and adherence to version control varies. HPCC keep a curated 
 list [here](https://github.com/hpcc-systems/ecl-bundles).
 
 ### IMPORTing dapper
@@ -138,7 +138,7 @@ tt.to_csv(sortedBMI, 'ROB::TEMP::STARWARSCSV');
 ```
 
 
-### So let's break some of this down. 
+### So let's break some of this down  
 
 #### Example Dataset
 ```ECL
@@ -199,9 +199,9 @@ even hand multiple columns to it and it'll handle them all perfectly.
 ```ECL
 //Finally let's look at unique hair/eye colour combinations:
 colourData := tt.select(StarWars, 'hair_color, eye_color'); 
-unqiueColours := tt.distinct(colourData, 'hair_color, eye_color'); 
-tt.head(unqiueColours);
-tt.countn(unqiueColours);
+uniqueColours := tt.distinct(colourData, 'hair_color, eye_color'); 
+tt.head(uniqueColours);
+tt.countn(uniqueColours);
 ```
 
 `select` (and it's partner function `drop`) will help in quickly sub-setting data, note too the use of distinct which is 
