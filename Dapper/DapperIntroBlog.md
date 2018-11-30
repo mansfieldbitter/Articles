@@ -56,7 +56,7 @@ right tools, right job. It is worth noting however that, even if you use several
 compiler is clever enough to combine this into a single operation under the bonnet, minimising dapper's speed impact. 
 
 The bundle itself is broken down into two sets of tools. This post will focus on our transform tools. I 
-will do a separate post on stringtools (and our in development bundle geodapper) in the future watch this space!
+will do a separate post on stringtools (and our in development bundle geodapper) in the future. Watch this space!
 
 
 ## Transform Tools
