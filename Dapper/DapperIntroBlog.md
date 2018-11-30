@@ -43,7 +43,7 @@ IMPORT dapper.TransformTools as tt;
 IMPORT dapper.StringTools as st;
 ```
 
-**inDS and OutDS are reserved** You may find you get weird errors if you use these variable names, this will be fixed in a later 
+**inDS and OutDS are reserved!** You may find you get weird errors if you use these variable names, this will be fixed in a later 
 release.
 
 
@@ -109,10 +109,10 @@ tt.head(StarWars);
 fillblankHome := tt.mutate(StarWars, species, IF(species = '', 'Unkn.', species));
 tt.head(fillblankHome);
 
+
 //Create a BMI for each character
 bmi := tt.append(fillblankHome, REAL, BMI, mass/height^2);
 tt.head(bmi);
-
 
 //Find the highest
 sortedBMI := tt.arrange(bmi, '-bmi');
