@@ -1,3 +1,7 @@
+OLD REPO OLD ACCOUNT.
+
+I NOW LIVE AT https://github.com/mansfieldbitter/Articles.git
+
 # Articles
 Place for some of my guides and posts. 
 
