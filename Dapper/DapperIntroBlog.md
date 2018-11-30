@@ -1,3 +1,4 @@
+# Dapper - a package to make your ECL more dashing. 
 At Proagrica we’ve been using HPCC for our data storage and transformation for a couple of years. We’ve learnt a lot over this 
 time but there’s something that comes up quite frequently while we are testing, doing quick investigations or making some model 
 features. The issue is that ECL can be a bit verbose and sometimes simple things are not simple to remember. It can be especially 
@@ -9,9 +10,9 @@ may well get what we mean!
 
 Intrigued? Me too. Let’s look at what it can do! 
 
-# Setup
+## Setup
 
-## Bundles 
+### Bundles 
 
 Dapper is available as an ECL bundle. Something that we only recently learned is that HPCC actually supports libraries in a 
 similar way to Python's pip. It isn't quite as fully featured but it works well enough. The basic idea is that it will 
@@ -28,7 +29,7 @@ ecl bundle install -v https://github.com/OdinProAgrica/dapper.git
 There's many more bundles available, but their coverage, testing and adherence to version control varies. HPCC keep a curated 
 list [here](https://github.com/hpcc-systems/ecl-bundles).
 
-## IMPORTing dapper
+### IMPORTing dapper
 
 **Do note that the standard nomenclature for importing the modules should be respected.** This is because each module references 
 its own functions, requiring a known import name. Modules should always be imported as:
@@ -46,7 +47,7 @@ IMPORT dapper.StringTools as st;
 release.
 
 
-# So, what can it do? 
+## So, what can it do? 
 
 Once installed, dapper can be used to create scripts using simple verbs which can increase readability and decrease coding 
 mistakes. In short, it reduces the amount of time you spend thinking about *how* to do a job, you can just get on with it. Don’t 
@@ -58,35 +59,35 @@ The bundle itself is broken down into two sets of tools. This post will focus on
 will do a separate post on stringtools (and our in development bundle geodapper) in the future watch this space!
 
 
-# Transform Tools
+## Transform Tools
 
 Have a quick skim over dappper's key functions below, I've just chosen a subset here, a more complete list is available
 on the [project's github](https://github.com/OdinProAgrica/dapper) and includes things like filter operations. Once 
 you've got the gist I'll give you an ECL script we can pick apart. 
 
-### Data Transformations
+#### Data Transformations
 ![](https://github.com/odinproagrica/DocumentationImages/blob/master/TransformTools/DataTransformations.PNG)
 
-### Duplicates
+#### Duplicates
 ![](https://github.com/odinproagrica/DocumentationImages/blob/master/TransformTools/DupsDedups.PNG)
 
-### Column Transforms
+#### Column Transforms
 ![](https://github.com/odinproagrica/DocumentationImages/blob/master/TransformTools/Columns.PNG)
 
-### Filters
+#### Filters
 ![](https://github.com/odinproagrica/DocumentationImages/blob/master/TransformTools/Filters.PNG)
 
-### Arrangement
+#### Arrangement
 ![](https://github.com/odinproagrica/DocumentationImages/blob/master/TransformTools/Arrange.PNG)
 
-### Outputs
+#### Outputs
 ![](https://github.com/odinproagrica/DocumentationImages/blob/master/TransformTools/Outputs.PNG)
 
-### Summaries
+#### Summaries
 ![](https://github.com/odinproagrica/DocumentationImages/blob/master/TransformTools/Summaries.PNG)
 
 
-# How does it work? 
+## How does it work? 
 
 Okay, so I'm going to give you an ECL script which (assuming you have installed dapper using the bundle method described above) 
 will work on your system (fingers crossed!). 
@@ -137,10 +138,9 @@ tt.to_csv(sortedBMI, 'ROB::TEMP::STARWARSCSV');
 ```
 
 
-## So let's break some of this down. 
+### So let's break some of this down. 
 
-
-### Example Dataset
+#### Example Dataset
 ```ECL
 IMPORT dapper.ExampleData;
 IMPORT dapper.TransformTools as tt;
@@ -151,7 +151,7 @@ StarWars := ExampleData.starwars;
 
 Yes, I'm a nerd, what of it? 
 
-### Viewing Data
+#### Viewing Data
 
 ```ECL
 // Look at the data
@@ -163,7 +163,7 @@ These are shorthand for `OUTPUT` and `COUNT` however note the way the results ar
 to match your variables. 
 
 
-### Transformations
+#### Transformations
 
 ```ECL
 //Fill blank species with unknown
@@ -183,7 +183,7 @@ tt.head(sortedBMI);
 Mutate and append allow column transforms via a simple formula. Note that there is no need for `SELF` or `LEFT` in these 
 transforms, making them easier to write and easier to read!
 
-### Grouped Counts
+#### Grouped Counts
 
 ```ECL
 //How many of each species are there?
@@ -195,7 +195,7 @@ tt.head(sortedspecies);
 The record definition to do a cross-tab is something I always have to look up. `countn` will do it for you, you can 
 even hand multiple columns to it and it'll handle them all perfectly.
 
-### Deduplication and Column Selection
+#### Deduplication and Column Selection
 ```ECL
 //Finally let's look at unique hair/eye colour combinations:
 colourData := tt.select(StarWars, 'hair_color, eye_color'); 
@@ -210,7 +210,7 @@ and distribute commands separately. See also `duplicated` which will flag all du
 
 Also, sorry for the UK English, sometimes I can't help myself!
 
-### Saving Results
+#### Saving Results
 ```ECL
 //and save our results
 tt.to_csv(sortedBMI, 'ROB::TEMP::STARWARSCSV');
@@ -220,7 +220,7 @@ Finally we can write out. `OUTPUT(...CSV(...))` is another one of those function
 separator, header stuff for you and simply writes out a 'normal' csv file. It'll also add the tilde (~) to the start
 of your file name if you forget. 
 
-# Summary
+## Summary
 
 That's a quick whistle stop tour of dapper's power and functionality. I hope you can see how useful it is for things like testing
 and investigative work, allowing a more logical flow and readable code. If you do have any comments or suggestions please do 
